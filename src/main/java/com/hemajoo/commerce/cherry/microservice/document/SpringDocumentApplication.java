@@ -28,6 +28,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.util.Arrays;
+
 /**
  * Spring boot application for the <b>document microservice</b>.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
@@ -104,6 +106,24 @@ public class SpringDocumentApplication
     }
 
     /**
+     * Dump the Spring beans.
+     */
+    @Bean
+    public void dumpBeans()
+    {
+        int index = 1;
+        String[] beans = applicationContext.getBeanDefinitionNames();
+        Arrays.sort(beans);
+
+        LOGGER.debug(String.format("%s beans loaded...", beans.length));
+        for (String bean : beans)
+        {
+            LOGGER.debug(String.format("# %s: %s", index, bean));
+            index++;
+        }
+    }
+
+    /**
      * Main application entry point.
      * @param args Arguments.
      */
@@ -111,19 +131,4 @@ public class SpringDocumentApplication
     {
         SpringApplication.run(SpringDocumentApplication.class, args);
     }
-
-//    @Override
-//    public void run(String... args) throws Exception
-//    {
-//        int index = 1;
-//        String[] beans = applicationContext.getBeanDefinitionNames();
-//        Arrays.sort(beans);
-//
-//        LOGGER.debug(String.format("%s beans loaded...", beans.length));
-//        for (String bean : beans)
-//        {
-//            LOGGER.debug(String.format("# %s: %s", index, bean));
-//            index++;
-//        }
-//    }
 }
