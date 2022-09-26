@@ -14,6 +14,7 @@
  */
 package com.hemajoo.commerce.cherry.microservice.document;
 
+import com.hemajoo.commerce.cherry.microservice.document.config.MicroserviceDocumentConfig;
 import com.hemajoo.commerce.cherry.microservice.document.rest.controller.DocumentController;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -27,6 +28,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 
 import java.util.Arrays;
 
@@ -36,7 +38,7 @@ import java.util.Arrays;
  * @version 1.0.0
  */
 @Log4j2
-//@Import({ PersistenceConfiguration.class })
+@Import({ MicroserviceDocumentConfig.class })
 @ComponentScan(basePackageClasses = { DocumentController.class })
 @SpringBootApplication//(exclude = { S3ContentAutoConfiguration.class })
 public class SpringDocumentApplication
